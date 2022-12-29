@@ -7,7 +7,7 @@ enum Auth {
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
-  static const route_name = "/auth-screen";
+  static const String routeName = "/auth-screen";
 
   @override
   State<AuthScreen> createState() => _AuthScreenState();

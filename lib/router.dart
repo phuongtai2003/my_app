@@ -3,7 +3,7 @@ import 'package:my_app/features/auth/screens/auth_screen.dart';
 
 Route<dynamic> onGeneratedRoute(RouteSettings settings) {
   switch (settings.name) {
-    case AuthScreen.route_name:
+    case AuthScreen.routeName:
       return MaterialPageRoute(
         builder: (_) => const AuthScreen(),
         settings: settings,
