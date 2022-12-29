@@ -11,5 +11,5 @@ class GlobalVariables {
     stops: [0.3, 0.6, 1],
   );
   static const backgroundColor = Colors.white;
-  static const secondaryColor = Color.fromARGB(255, 40, 244, 70);
+  static const secondaryColor = Color.fromARGB(255, 246, 216, 48);
 }
