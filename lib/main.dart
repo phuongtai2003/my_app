@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/common/user_bottom_bar.dart';
 import 'package:my_app/constants/global_variables.dart';
 import 'package:my_app/features/auth/screens/auth_screen.dart';
+import 'package:my_app/features/auth/services/auth_services.dart';
 import 'package:my_app/provider/user_provider.dart';
 import 'package:my_app/router.dart';
 import 'package:provider/provider.dart';
@@ -18,10 +20,22 @@ void main() {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  
+  final AuthServices _authServices = AuthServices();
+  @override
+  void initState() {
+    _authServices.getUserData(context: context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -40,7 +54,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       onGenerateRoute: (settings) => onGeneratedRoute(settings),
-      home: const AuthScreen(),
+      home: Provider.of<UserProvider>(context).user.token.isNotEmpty ? const UserBottomBar() : const AuthScreen()
     );
   }
 }
