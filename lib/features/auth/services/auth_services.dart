@@ -22,7 +22,7 @@ class AuthServices {
         token: "",
       );
       http.Response res = await http.post(
-        Uri.parse("$uri/signup"),
+        Uri.parse("$uri/api/signup"),
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
         },

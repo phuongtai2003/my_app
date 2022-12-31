@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/common/custom_button.dart';
 import 'package:my_app/common/custom_textfield.dart';
+import 'package:my_app/features/auth/services/auth_services.dart';
 
 enum Auth {
   signUp,
@@ -21,6 +22,23 @@ class _AuthScreenState extends State<AuthScreen> {
   final TextEditingController _nameTextController = TextEditingController();
   final GlobalKey<FormState> _signInFormKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _signUpFormKey = GlobalKey<FormState>();
+  final AuthServices _authServices = AuthServices();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailTextController.dispose();
+    _passwordTextController.dispose();
+    _nameTextController.dispose();
+  }
+
+  void registerUser() {
+    _authServices.signUpUser(
+        context: context,
+        email: _emailTextController.text,
+        password: _passwordTextController.text,
+        name: _nameTextController.text);
+  }
 
   Auth _auth = Auth.signUp;
   @override
@@ -107,7 +125,9 @@ class _AuthScreenState extends State<AuthScreen> {
                         CustomButton(
                           buttonText: "Register",
                           onTap: () {
-                            if (_signUpFormKey.currentState!.validate()) {}
+                            if (_signUpFormKey.currentState!.validate()) {
+                              registerUser();
+                            }
                           },
                         ),
                       if (_auth == Auth.signIn)
