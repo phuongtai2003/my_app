@@ -28,7 +28,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  
   final AuthServices _authServices = AuthServices();
   @override
   void initState() {
@@ -54,7 +53,9 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       onGenerateRoute: (settings) => onGeneratedRoute(settings),
-      home: Provider.of<UserProvider>(context).user.token.isNotEmpty ? const UserBottomBar() : const AuthScreen()
+      home: Provider.of<UserProvider>(context).user.token.isNotEmpty
+          ? const UserBottomBar()
+          : const AuthScreen(),
     );
   }
 }

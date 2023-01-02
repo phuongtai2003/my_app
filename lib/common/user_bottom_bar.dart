@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/constants/global_variables.dart';
 import 'package:my_app/features/home/screens/home_screen.dart';
+import 'package:my_app/features/profile/screens/profile_screen.dart';
 
 class UserBottomBar extends StatefulWidget {
   const UserBottomBar({super.key});
@@ -16,7 +17,7 @@ class _UserBottomBarState extends State<UserBottomBar> {
 
   List<Widget> pages = [
     const HomeScreen(),
-    const Text("Profile"),
+    const ProfileScreen(),
     const Text("Cart"),
     const Text("Order")
   ];
@@ -72,7 +73,7 @@ class _UserBottomBarState extends State<UserBottomBar> {
                 size: 30,
               ),
             ),
-             label: '',
+            label: '',
           ),
           BottomNavigationBarItem(
             icon: Container(
@@ -92,7 +93,7 @@ class _UserBottomBarState extends State<UserBottomBar> {
                 size: 30,
               ),
             ),
-             label: '',
+            label: '',
           ),
           BottomNavigationBarItem(
             icon: Container(
@@ -112,7 +113,7 @@ class _UserBottomBarState extends State<UserBottomBar> {
                 size: 30,
               ),
             ),
-             label: '',
+            label: '',
           ),
         ],
       ),
