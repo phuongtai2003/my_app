@@ -25,8 +25,8 @@ class ProfileScreen extends StatelessWidget {
             children: [
               Container(
                 alignment: Alignment.topLeft,
-                padding: const EdgeInsets.only(
-                  top: 10,
+                margin: const EdgeInsets.only(
+                  top: 5,
                   bottom: 5,
                 ),
                 child: Image.asset(
