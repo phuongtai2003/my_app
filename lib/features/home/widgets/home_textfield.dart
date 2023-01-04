@@ -30,13 +30,13 @@ class HomeTextField extends StatelessWidget {
           left: 5,
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(7),
           borderSide: const BorderSide(
             color: Colors.black,
           ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(7),
           borderSide: const BorderSide(
             color: Colors.black,
           ),

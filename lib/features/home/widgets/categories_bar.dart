@@ -8,7 +8,14 @@ class CategoriesBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
-        vertical: 5,
+        vertical: 10,
+      ),
+      decoration: const BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            width: 1,
+          ),
+        ),
       ),
       height: 90,
       child: ListView.builder(
@@ -40,7 +47,7 @@ class CategoriesBar extends StatelessWidget {
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
                   ),
-                )
+                ),
               ],
             ),
           );

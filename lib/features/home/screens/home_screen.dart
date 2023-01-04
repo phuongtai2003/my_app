@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/constants/global_variables.dart';
+import 'package:my_app/features/home/widgets/address_bar.dart';
+import 'package:my_app/features/home/widgets/carousel_images.dart';
 import 'package:my_app/features/home/widgets/categories_bar.dart';
 import 'package:my_app/features/home/widgets/home_textfield.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:my_app/features/home/widgets/top_deal.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "/home";
@@ -62,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   right: 5,
                 ),
                 child: const Icon(
-                  Icons.notifications,
+                  Icons.notifications_outlined,
                   color: Colors.black,
                   size: 30,
                 ),
@@ -71,10 +75,18 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: Column(
-        children: const [
-          CategoriesBar(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            AddressBar(),
+            CategoriesBar(),
+            CarouselImages(),
+            SizedBox(
+              height: 10,
+            ),
+            TopDeal(),
+          ],
+        ),
       ),
     );
   }

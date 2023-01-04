@@ -27,9 +27,11 @@ class _UserBottomBarState extends State<UserBottomBar> {
       body: pages[pageIndex],
       bottomNavigationBar: BottomNavigationBar(
         onTap: (value) {
-          setState(() {
-            pageIndex = value;
-          });
+          if (value != pageIndex) {
+            setState(() {
+              pageIndex = value;
+            });
+          }
         },
         currentIndex: pageIndex,
         selectedItemColor: GlobalVariables.selectedColor,
