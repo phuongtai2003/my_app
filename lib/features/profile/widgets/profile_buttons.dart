@@ -20,7 +20,7 @@ class AccountButtons extends StatelessWidget {
                 child: ProfileCustomButton(
                   buttonText: "Account Settings",
                   onPressed: () {},
-                  color: Colors.grey,
+                  color: Colors.black12,
                 ),
               ),
               const SizedBox(
@@ -30,7 +30,7 @@ class AccountButtons extends StatelessWidget {
                 child: ProfileCustomButton(
                   buttonText: "Orders",
                   onPressed: () {},
-                  color: Colors.grey,
+                  color: Colors.black12,
                 ),
               ),
             ],
@@ -42,9 +42,9 @@ class AccountButtons extends StatelessWidget {
             children: [
               Expanded(
                 child: ProfileCustomButton(
-                  buttonText: "My Wishlist",
+                  buttonText: "Turn Seller",
                   onPressed: () {},
-                  color: Colors.grey,
+                  color: Colors.black12,
                 ),
               ),
               const SizedBox(
@@ -56,7 +56,7 @@ class AccountButtons extends StatelessWidget {
                   onPressed: () {
                     profileServices.logOut(context: context);
                   },
-                  color: Colors.grey,
+                  color: Colors.black12,
                 ),
               ),
             ],
