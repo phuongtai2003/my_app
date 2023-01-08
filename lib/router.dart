@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/common/seller_bottom_bar.dart';
 import 'package:my_app/common/user_bottom_bar.dart';
 import 'package:my_app/features/auth/screens/auth_screen.dart';
 import 'package:my_app/features/home/screens/home_screen.dart';
 import 'package:my_app/features/profile/screens/profile_screen.dart';
+import 'package:my_app/features/seller/screens/seller_screen.dart';
 
 Route<dynamic> onGeneratedRoute(RouteSettings settings) {
   switch (settings.name) {
+    case SellerScreen.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const SellerScreen(),
+        settings: settings,
+      );
+    case SellerBottomBar.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const SellerBottomBar(),
+        settings: settings,
+      );
     case ProfileScreen.routeName:
       return MaterialPageRoute(
         builder: (_) => const ProfileScreen(),

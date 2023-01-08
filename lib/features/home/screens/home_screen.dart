@@ -4,7 +4,6 @@ import 'package:my_app/features/home/widgets/address_bar.dart';
 import 'package:my_app/features/home/widgets/carousel_images.dart';
 import 'package:my_app/features/home/widgets/categories_bar.dart';
 import 'package:my_app/features/home/widgets/home_textfield.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:my_app/features/home/widgets/top_deal.dart';
 
 class HomeScreen extends StatefulWidget {

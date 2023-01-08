@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/common/seller_bottom_bar.dart';
 import 'package:my_app/common/user_bottom_bar.dart';
 import 'package:my_app/constants/global_variables.dart';
 import 'package:my_app/features/auth/screens/auth_screen.dart';
@@ -54,7 +55,9 @@ class _MyAppState extends State<MyApp> {
       ),
       onGenerateRoute: (settings) => onGeneratedRoute(settings),
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-          ? const UserBottomBar()
+          ? (Provider.of<UserProvider>(context).user.type == "user"
+              ? const UserBottomBar()
+              : const SellerBottomBar())
           : const AuthScreen(),
     );
   }
