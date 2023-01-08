@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/features/profile/services/profile_services.dart';
 import 'package:my_app/features/profile/widgets/profile_custom_button.dart';
+import 'package:my_app/provider/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class AccountButtons extends StatelessWidget {
   const AccountButtons({super.key});
@@ -8,6 +10,7 @@ class AccountButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ProfileServices profileServices = ProfileServices();
+    final user = context.watch<UserProvider>().user;
     return Container(
       padding: const EdgeInsets.all(
         10,
@@ -42,8 +45,12 @@ class AccountButtons extends StatelessWidget {
             children: [
               Expanded(
                 child: ProfileCustomButton(
-                  buttonText: "Turn Seller",
-                  onPressed: () {},
+                  buttonText: user.type == "user" ? "Turn Seller" : "Turn User",
+                  onPressed: () {
+                    profileServices.turn(
+                      context: context,
+                    );
+                  },
                   color: Colors.black12,
                 ),
               ),

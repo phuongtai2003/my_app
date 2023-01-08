@@ -52,9 +52,6 @@ class ProfileScreen extends StatelessWidget {
       body: Column(
         children: const [
           Name(),
-          SizedBox(
-            height: 15,
-          ),
           AccountButtons(),
         ],
       ),

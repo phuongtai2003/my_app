@@ -29,7 +29,7 @@ class Name extends StatelessWidget {
       ),
       child: RichText(
         text: TextSpan(
-          text: "Good ${getTime()}, ",
+          text: "Good ${getTime()},\n",
           style: const TextStyle(
             fontSize: 18,
             color: Colors.black,
