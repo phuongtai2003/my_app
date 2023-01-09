@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/constants/global_variables.dart';
+import 'package:my_app/features/seller/screens/add_product_screen.dart';
 
 class SellerScreen extends StatefulWidget {
   const SellerScreen({super.key});
@@ -10,6 +11,13 @@ class SellerScreen extends StatefulWidget {
 }
 
 class _SellerScreenState extends State<SellerScreen> {
+  void navigateToAddScreen() {
+    Navigator.pushNamed(
+      context,
+      AddProductScreen.routeName,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +59,7 @@ class _SellerScreenState extends State<SellerScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: navigateToAddScreen,
         tooltip: "Add a product",
         backgroundColor: GlobalVariables.secondaryColor,
         child: const Icon(

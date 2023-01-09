@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-String uri = "http://192.168.1.9:3000";
+String uri = "http://192.168.1.7:3000";
 
 class GlobalVariables {
   static const appBarGradient = LinearGradient(
@@ -14,6 +14,7 @@ class GlobalVariables {
   static const secondaryColor = Color.fromARGB(255, 246, 216, 48);
   static const selectedColor = Color.fromARGB(255, 141, 141, 13);
   static const unselectedColor = Colors.black12;
+  static const selectImageBoxColor = Color.fromARGB(181, 236, 232, 232);
 
   static const categories = [
     {

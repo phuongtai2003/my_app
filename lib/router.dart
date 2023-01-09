@@ -4,10 +4,16 @@ import 'package:my_app/common/user_bottom_bar.dart';
 import 'package:my_app/features/auth/screens/auth_screen.dart';
 import 'package:my_app/features/home/screens/home_screen.dart';
 import 'package:my_app/features/profile/screens/profile_screen.dart';
+import 'package:my_app/features/seller/screens/add_product_screen.dart';
 import 'package:my_app/features/seller/screens/seller_screen.dart';
 
 Route<dynamic> onGeneratedRoute(RouteSettings settings) {
   switch (settings.name) {
+    case AddProductScreen.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const AddProductScreen(),
+        settings: settings,
+      );
     case SellerScreen.routeName:
       return MaterialPageRoute(
         builder: (_) => const SellerScreen(),

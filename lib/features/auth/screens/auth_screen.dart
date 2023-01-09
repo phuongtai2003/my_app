@@ -110,21 +110,21 @@ class _AuthScreenState extends State<AuthScreen> {
                       if (_auth == Auth.signUp)
                         CustomTextField(
                           textEditingController: _nameTextController,
-                          hintText: "name",
+                          hintText: "Name",
                         ),
                       const SizedBox(
                         height: 20,
                       ),
                       CustomTextField(
                         textEditingController: _emailTextController,
-                        hintText: "email",
+                        hintText: "Email",
                       ),
                       const SizedBox(
                         height: 20,
                       ),
                       CustomTextField(
                         textEditingController: _passwordTextController,
-                        hintText: "password",
+                        hintText: "Password",
                       ),
                       const SizedBox(
                         height: 30,
