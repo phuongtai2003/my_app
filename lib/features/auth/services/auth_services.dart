@@ -6,7 +6,7 @@ import 'package:my_app/common/user_bottom_bar.dart';
 import 'package:my_app/constants/error_handler.dart';
 import 'package:my_app/constants/global_variables.dart';
 import 'package:my_app/constants/utils.dart';
-import 'package:my_app/modals/user.dart';
+import 'package:my_app/models/user.dart';
 import 'package:my_app/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
