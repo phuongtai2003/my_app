@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:cloudinary_public/cloudinary_public.dart';
@@ -21,6 +22,7 @@ class SellerServices {
     required String category,
     required List<File> images,
   }) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
       CloudinaryPublic cloudinaryPublic =
           CloudinaryPublic("dhpxifsfm", "d7c0cf8t");
@@ -34,7 +36,6 @@ class SellerServices {
         );
         imageUrls.add(res.secureUrl);
       }
-      final userProvider = context.watch<UserProvider>();
       Product product = Product(
         name: name,
         price: price,
@@ -71,5 +72,42 @@ class SellerServices {
         e.toString(),
       );
     }
+  }
+
+  Future<List<Product>> getAllProduct({
+    required BuildContext context,
+  }) async {
+    List<Product> results = [];
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    try {
+      http.Response res = await http.get(
+          Uri.parse(
+            "$uri/api/product/get",
+          ),
+          headers: {
+            "Content-Type": "application/json; charset=UTF-8",
+            "token": userProvider.user.token,
+          });
+      httpErrorHandler(
+        context: context,
+        res: res,
+        onSuccess: () {
+          final products = jsonDecode(res.body);
+          for (int i = 0; i < products.length; i++) {
+            results.add(
+              Product.fromJson(
+                jsonEncode(products[i]),
+              ),
+            );
+          }
+        },
+      );
+    } catch (e) {
+      showSnackBar(
+        context,
+        e.toString(),
+      );
+    }
+    return results;
   }
 }

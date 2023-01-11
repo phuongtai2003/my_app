@@ -223,7 +223,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 ),
                 CustomButton(
                   buttonText: "Sell Product",
-                  onTap: () {},
+                  onTap: sell,
                 ),
               ],
             ),

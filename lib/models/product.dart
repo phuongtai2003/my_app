@@ -3,6 +3,7 @@ import 'dart:convert';
 
 class Product {
   final String? id;
+  final String? userId;
   final String name;
   final double price;
   final double weight;
@@ -13,6 +14,7 @@ class Product {
 
   Product({
     this.id,
+    this.userId,
     required this.name,
     required this.price,
     required this.weight,
@@ -25,6 +27,7 @@ class Product {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
+      'userId': userId,
       'name': name,
       'price': price,
       'weight': weight,
@@ -38,13 +41,14 @@ class Product {
   factory Product.fromMap(Map<String, dynamic> map) {
     return Product(
       id: map['_id'] != null ? map['_id'] as String : null,
+      userId: map['userId'] != null ? map['userId'] as String : null,
       name: map['name'] as String,
       price: map['price']?.toDouble() ?? 0,
       weight: map['weight']?.toDouble() ?? 0,
       quantity: map['quantity']?.toInt() ?? 0,
       description: map['description'] as String,
       category: map['category'] as String,
-      images: List<String>.from((map['images'] as List<String>)),
+      images: List<String>.from((map['images'])),
     );
   }
 

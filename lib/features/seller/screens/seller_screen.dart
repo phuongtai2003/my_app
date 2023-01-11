@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/common/single_product.dart';
 import 'package:my_app/constants/global_variables.dart';
 import 'package:my_app/features/seller/screens/add_product_screen.dart';
+import 'package:my_app/features/seller/services/seller_services.dart';
+import 'package:my_app/models/product.dart';
 
 class SellerScreen extends StatefulWidget {
   const SellerScreen({super.key});
@@ -11,6 +14,20 @@ class SellerScreen extends StatefulWidget {
 }
 
 class _SellerScreenState extends State<SellerScreen> {
+  final SellerServices sellerServices = SellerServices();
+  List<Product> products = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchAllProducts();
+  }
+
+  void fetchAllProducts() async {
+    products = await sellerServices.getAllProduct(context: context);
+    setState(() {});
+  }
+
   void navigateToAddScreen() {
     Navigator.pushNamed(
       context,
@@ -58,6 +75,28 @@ class _SellerScreenState extends State<SellerScreen> {
           ),
         ),
       ),
+      body: products.isEmpty
+          ? const Center(
+              child: Text("There is no products to show"),
+            )
+          : GridView.builder(
+              padding: const EdgeInsets.symmetric(
+                vertical: 5,
+                horizontal: 5,
+              ),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.75,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 15,
+              ),
+              itemCount: products.length,
+              itemBuilder: (context, index) {
+                return SingleProduct(
+                  product: products[index],
+                );
+              },
+            ),
       floatingActionButton: FloatingActionButton(
         onPressed: navigateToAddScreen,
         tooltip: "Add a product",
