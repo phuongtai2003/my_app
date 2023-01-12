@@ -5,11 +5,20 @@ import 'package:my_app/features/auth/screens/auth_screen.dart';
 import 'package:my_app/features/home/screens/category_screen.dart';
 import 'package:my_app/features/home/screens/home_screen.dart';
 import 'package:my_app/features/profile/screens/profile_screen.dart';
+import 'package:my_app/features/search/screens/search_screen.dart';
 import 'package:my_app/features/seller/screens/add_product_screen.dart';
 import 'package:my_app/features/seller/screens/seller_screen.dart';
 
 Route<dynamic> onGeneratedRoute(RouteSettings settings) {
   switch (settings.name) {
+    case SearchScreen.routeName:
+      final name = settings.arguments as String;
+      return MaterialPageRoute(
+        builder: (_) => SearchScreen(
+          name: name,
+        ),
+        settings: settings,
+      );
     case CategoryScreen.routeName:
       final query = settings.arguments as String;
       return MaterialPageRoute(
