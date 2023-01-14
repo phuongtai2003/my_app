@@ -1,38 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/common/single_product.dart';
 import 'package:my_app/constants/global_variables.dart';
-import 'package:my_app/features/seller/screens/add_product_screen.dart';
+import 'package:my_app/constants/utils.dart';
 import 'package:my_app/features/seller/services/seller_services.dart';
 import 'package:my_app/models/product.dart';
 
-class SellerScreen extends StatefulWidget {
-  const SellerScreen({super.key});
-  static const String routeName = "/seller_screen";
+class DeleteProductScreen extends StatefulWidget {
+  const DeleteProductScreen({super.key});
+  static const String routeName = '/delete-screen';
 
   @override
-  State<SellerScreen> createState() => _SellerScreenState();
+  State<DeleteProductScreen> createState() => _DeleteProductScreenState();
 }
 
-class _SellerScreenState extends State<SellerScreen> {
+class _DeleteProductScreenState extends State<DeleteProductScreen> {
   final SellerServices sellerServices = SellerServices();
   List<Product> products = [];
-
-  @override
-  void initState() {
-    super.initState();
-    fetchAllProducts();
-  }
 
   void fetchAllProducts() async {
     products = await sellerServices.getAllProduct(context: context);
     setState(() {});
   }
 
-  void navigateToAddScreen() {
-    Navigator.pushNamed(
-      context,
-      AddProductScreen.routeName,
+  void deleteProduct(Product product, int index) async {
+    sellerServices.deleteProduct(
+      context: context,
+      product: product,
+      onSuccess: () {
+        products.removeAt(index);
+        setState(() {});
+        showSnackBar(context, "${product.name} has been removed successfully");
+      },
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchAllProducts();
   }
 
   @override
@@ -82,31 +87,36 @@ class _SellerScreenState extends State<SellerScreen> {
           : GridView.builder(
               padding: const EdgeInsets.symmetric(
                 vertical: 5,
-                horizontal: 5,
+                horizontal: 10,
               ),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.8,
-                crossAxisSpacing: 10,
+                childAspectRatio: 0.75,
+                crossAxisSpacing: 15,
                 mainAxisSpacing: 10,
               ),
               itemCount: products.length,
-              itemBuilder: (context, index) {
-                return SingleProduct(
+              itemBuilder: (context, index) => GestureDetector(
+                onTap: () {
+                  showDialogBox(
+                    context: context,
+                    title: "Delete Product",
+                    bodyContent:
+                        "Are you sure you want to delete ${products[index].name}.",
+                    onYesChoice: () {
+                      deleteProduct(
+                        products[index],
+                        index,
+                      );
+                      Navigator.pop(context);
+                    },
+                  );
+                },
+                child: SingleProduct(
                   product: products[index],
-                );
-              },
+                ),
+              ),
             ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: navigateToAddScreen,
-        tooltip: "Add a product",
-        backgroundColor: GlobalVariables.secondaryColor,
-        child: const Icon(
-          Icons.add,
-          color: Colors.black,
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

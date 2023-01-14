@@ -81,13 +81,14 @@ class SellerServices {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
       http.Response res = await http.get(
-          Uri.parse(
-            "$uri/api/product/get",
-          ),
-          headers: {
-            "Content-Type": "application/json; charset=UTF-8",
-            "token": userProvider.user.token,
-          });
+        Uri.parse(
+          "$uri/api/product/get",
+        ),
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+          "token": userProvider.user.token,
+        },
+      );
       httpErrorHandler(
         context: context,
         res: res,
@@ -109,5 +110,43 @@ class SellerServices {
       );
     }
     return results;
+  }
+
+  void deleteProduct({
+    required BuildContext context,
+    required Product product,
+    required VoidCallback onSuccess,
+  }) async {
+    final userProvider = Provider.of<UserProvider>(
+      context,
+      listen: false,
+    );
+    try {
+      http.Response res = await http.post(
+        Uri.parse(
+          "$uri/api/product/delete",
+        ),
+        body: jsonEncode(
+          {
+            'id': product.id,
+          },
+        ),
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+          "token": userProvider.user.token,
+        },
+      );
+
+      httpErrorHandler(
+        context: context,
+        res: res,
+        onSuccess: onSuccess,
+      );
+    } catch (e) {
+      showSnackBar(
+        context,
+        e.toString(),
+      );
+    }
   }
 }

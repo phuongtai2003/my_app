@@ -18,7 +18,7 @@ class HomeServices {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
       http.Response res = await http.get(
-        Uri.parse("$uri/api/product/?category=$category"),
+        Uri.parse("$uri/api/product?category=$category"),
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
           "token": userProvider.user.token,

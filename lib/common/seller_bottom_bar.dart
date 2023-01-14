@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/constants/global_variables.dart';
 import 'package:my_app/features/profile/screens/profile_screen.dart';
+import 'package:my_app/features/seller/screens/delete_product_screen.dart';
 import 'package:my_app/features/seller/screens/seller_screen.dart';
 
 class SellerBottomBar extends StatefulWidget {
@@ -16,6 +17,7 @@ class _SellerBottomBarState extends State<SellerBottomBar> {
   double bottomBarItemWidth = 50;
   List<Widget> pages = [
     const SellerScreen(),
+    const DeleteProductScreen(),
     const ProfileScreen(),
   ];
   @override
@@ -55,6 +57,26 @@ class _SellerBottomBarState extends State<SellerBottomBar> {
                   bottom: BorderSide(
                     width: 2,
                     color: pageIndex == 1
+                        ? GlobalVariables.selectedColor
+                        : GlobalVariables.unselectedColor,
+                  ),
+                ),
+              ),
+              child: const Icon(
+                Icons.delete,
+                size: 30,
+              ),
+            ),
+            label: "",
+          ),
+          BottomNavigationBarItem(
+            icon: Container(
+              width: bottomBarItemWidth,
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    width: 2,
+                    color: pageIndex == 2
                         ? GlobalVariables.selectedColor
                         : GlobalVariables.unselectedColor,
                   ),

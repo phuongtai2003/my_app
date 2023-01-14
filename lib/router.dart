@@ -7,10 +7,16 @@ import 'package:my_app/features/home/screens/home_screen.dart';
 import 'package:my_app/features/profile/screens/profile_screen.dart';
 import 'package:my_app/features/search/screens/search_screen.dart';
 import 'package:my_app/features/seller/screens/add_product_screen.dart';
+import 'package:my_app/features/seller/screens/delete_product_screen.dart';
 import 'package:my_app/features/seller/screens/seller_screen.dart';
 
 Route<dynamic> onGeneratedRoute(RouteSettings settings) {
   switch (settings.name) {
+    case DeleteProductScreen.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const DeleteProductScreen(),
+        settings: settings,
+      );
     case SearchScreen.routeName:
       final name = settings.arguments as String;
       return MaterialPageRoute(

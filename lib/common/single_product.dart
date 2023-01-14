@@ -31,7 +31,7 @@ class SingleProduct extends StatelessWidget {
           Container(
             width: double.infinity,
             margin: const EdgeInsets.only(
-              top: 10,
+              top: 5,
             ),
             decoration: BoxDecoration(
               border: Border.all(
@@ -41,7 +41,7 @@ class SingleProduct extends StatelessWidget {
             child: Image.network(
               product.images[0],
               fit: BoxFit.cover,
-              height: 125,
+              height: 120,
             ),
           ),
           const SizedBox(

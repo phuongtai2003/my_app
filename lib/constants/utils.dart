@@ -32,3 +32,46 @@ Future<List<File>> pickImages() async {
   }
   return images;
 }
+
+Future<void> showDialogBox({
+  required BuildContext context,
+  required String title,
+  required String bodyContent,
+  required VoidCallback onYesChoice,
+}) async {
+  return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            title,
+            style: const TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          content: Text(
+            bodyContent,
+            style: const TextStyle(
+              fontSize: 18,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text(
+                "No",
+              ),
+            ),
+            TextButton(
+              onPressed: onYesChoice,
+              child: const Text(
+                "Yes",
+              ),
+            ),
+          ],
+        );
+      });
+}

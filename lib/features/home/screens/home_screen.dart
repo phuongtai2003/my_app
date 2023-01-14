@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/constants/global_variables.dart';
+import 'package:my_app/constants/utils.dart';
 import 'package:my_app/features/home/widgets/address_bar.dart';
 import 'package:my_app/features/home/widgets/carousel_images.dart';
 import 'package:my_app/features/home/widgets/categories_bar.dart';
-import 'package:my_app/features/home/widgets/home_textfield.dart';
 import 'package:my_app/features/home/widgets/top_deal.dart';
+import 'package:my_app/features/search/screens/search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "/home";
@@ -15,7 +16,21 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final TextEditingController _searchBarController = TextEditingController();
+  void navigateToSearchScreen(String? searchName) {
+    if (searchName == null || searchName.isEmpty) {
+      showSnackBar(
+        context,
+        "Search for a valid product name",
+      );
+    } else {
+      Navigator.pushNamed(
+        context,
+        SearchScreen.routeName,
+        arguments: searchName,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,15 +61,50 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Container(
                   height: 40,
                   margin: const EdgeInsets.only(
-                    left: 10,
+                    left: 15,
                   ),
                   child: Material(
-                    elevation: 1,
-                    borderRadius: BorderRadius.circular(15),
-                    child: HomeTextField(
-                      controller: _searchBarController,
-                      onPressed: () {},
-                      hintText: "Search a product",
+                    elevation: 2,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(
+                        15,
+                      ),
+                    ),
+                    child: TextFormField(
+                      onFieldSubmitted: navigateToSearchScreen,
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: Colors.black,
+                          size: 25,
+                        ),
+                        fillColor: Colors.white,
+                        filled: true,
+                        contentPadding: EdgeInsets.only(top: 10),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(15),
+                          ),
+                          borderSide: BorderSide(
+                            width: 2,
+                            color: GlobalVariables.secondaryColor,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(15),
+                          ),
+                          borderSide: BorderSide(
+                            width: 2,
+                            color: GlobalVariables.secondaryColor,
+                          ),
+                        ),
+                        hintText: "Search TaiShop",
+                        hintStyle: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
                     ),
                   ),
                 ),
