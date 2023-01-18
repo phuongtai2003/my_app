@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:my_app/common/single_product.dart';
 import 'package:my_app/constants/global_variables.dart';
 import 'package:my_app/features/home/services/home_services.dart';
+import 'package:my_app/features/product_details/screens/product_detail_screen.dart';
 import 'package:my_app/models/product.dart';
 
 class CategoryScreen extends StatefulWidget {
@@ -28,6 +29,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
       widget.query,
     );
     super.initState();
+  }
+
+  void navigateToDetailScreen(Product product) {
+    Navigator.pushNamed(
+      context,
+      ProductDetailScreen.routeName,
+      arguments: product,
+    );
   }
 
   @override
@@ -98,8 +107,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   crossAxisSpacing: 5,
                 ),
                 itemCount: products.length,
-                itemBuilder: (context, index) => SingleProduct(
-                  product: products[index],
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () => navigateToDetailScreen(products[index]),
+                  child: SingleProduct(
+                    product: products[index],
+                  ),
                 ),
               ),
             ),

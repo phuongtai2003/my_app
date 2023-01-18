@@ -1,4 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+
+import 'package:my_app/models/product.dart';
 
 class User {
   final String id;
@@ -8,6 +11,7 @@ class User {
   final String address;
   final String type;
   final String token;
+  final List<Product>? favoriteProducts;
 
   User({
     required this.id,
@@ -17,6 +21,7 @@ class User {
     required this.address,
     required this.type,
     required this.token,
+    this.favoriteProducts,
   });
 
   Map<String, dynamic> toMap() {
@@ -28,6 +33,7 @@ class User {
       'address': address,
       'type': type,
       'token': token,
+      'favoriteProducts': favoriteProducts!.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -40,6 +46,13 @@ class User {
       address: map['address'] as String,
       type: map['type'] as String,
       token: map['token'] as String,
+      favoriteProducts: map['favoriteProducts'] != null
+          ? List<Product>.from(
+              map['favoriteProducts']?.map<Product>(
+                (x) => Product.fromMap(x),
+              ),
+            )
+          : null,
     );
   }
 
@@ -56,6 +69,7 @@ class User {
     String? address,
     String? type,
     String? token,
+    List<Product>? favoriteProducts,
   }) {
     return User(
       id: id ?? this.id,
@@ -65,6 +79,7 @@ class User {
       address: address ?? this.address,
       type: type ?? this.type,
       token: token ?? this.token,
+      favoriteProducts: favoriteProducts ?? this.favoriteProducts,
     );
   }
 }

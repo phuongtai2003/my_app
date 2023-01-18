@@ -4,14 +4,24 @@ import 'package:my_app/common/user_bottom_bar.dart';
 import 'package:my_app/features/auth/screens/auth_screen.dart';
 import 'package:my_app/features/home/screens/category_screen.dart';
 import 'package:my_app/features/home/screens/home_screen.dart';
+import 'package:my_app/features/product_details/screens/product_detail_screen.dart';
 import 'package:my_app/features/profile/screens/profile_screen.dart';
 import 'package:my_app/features/search/screens/search_screen.dart';
 import 'package:my_app/features/seller/screens/add_product_screen.dart';
 import 'package:my_app/features/seller/screens/delete_product_screen.dart';
 import 'package:my_app/features/seller/screens/seller_screen.dart';
+import 'package:my_app/models/product.dart';
 
 Route<dynamic> onGeneratedRoute(RouteSettings settings) {
   switch (settings.name) {
+    case ProductDetailScreen.routeName:
+      final product = settings.arguments as Product;
+      return MaterialPageRoute(
+        builder: (_) => ProductDetailScreen(
+          product: product,
+        ),
+        settings: settings,
+      );
     case DeleteProductScreen.routeName:
       return MaterialPageRoute(
         builder: (_) => const DeleteProductScreen(),

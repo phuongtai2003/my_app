@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/common/single_product.dart';
 import 'package:my_app/constants/global_variables.dart';
+import 'package:my_app/features/product_details/screens/product_detail_screen.dart';
 import 'package:my_app/features/search/services/search_services.dart';
 import 'package:my_app/models/product.dart';
 
@@ -30,6 +31,14 @@ class _SearchScreenState extends State<SearchScreen> {
   void initState() {
     super.initState();
     fetchProducts();
+  }
+
+  void navigateToDetailScreen(Product product) {
+    Navigator.pushNamed(
+      context,
+      ProductDetailScreen.routeName,
+      arguments: product,
+    );
   }
 
   @override
@@ -96,8 +105,13 @@ class _SearchScreenState extends State<SearchScreen> {
                   crossAxisSpacing: 5,
                   mainAxisSpacing: 10,
                 ),
-                itemBuilder: (context, index) => SingleProduct(
-                  product: products[index],
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () => navigateToDetailScreen(
+                    products[index],
+                  ),
+                  child: SingleProduct(
+                    product: products[index],
+                  ),
                 ),
               ),
             ),

@@ -17,9 +17,14 @@ app.use(productRouter);
 const uri =
   "mongodb+srv://phuongtai03:Thanhtu03@cluster0.duwllpw.mongodb.net/?retryWrites=true&w=majority";
 
-mongoose.connect(uri).then(() => {
+mongoose
+  .connect(uri)
+  .then(() => {
     console.log("Connection successful");
-}).catch((e) => { console.log(e); });
+  })
+  .catch((e) => {
+    console.log(e);
+  });
 
 app.listen(PORT, function () {
   console.log(`Connected at ${PORT}`);

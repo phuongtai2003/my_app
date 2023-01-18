@@ -1,7 +1,7 @@
 const express = require("express");
 const sellerRouter = express.Router();
 const seller = require("../middlewares/seller");
-const Product = require("../models/product");
+const { Product } = require("../models/product");
 
 sellerRouter.post("/api/product/sell", seller, async (req, res) => {
   try {
