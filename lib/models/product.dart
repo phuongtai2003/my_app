@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:my_app/models/rating.dart';
+
 class Product {
   final String? id;
   final String? userId;
@@ -11,6 +13,7 @@ class Product {
   final String description;
   final String category;
   final List<String> images;
+  final List<Rating>? ratings;
 
   Product({
     this.id,
@@ -22,6 +25,7 @@ class Product {
     required this.description,
     required this.category,
     required this.images,
+    this.ratings,
   });
 
   Map<String, dynamic> toMap() {
@@ -35,6 +39,7 @@ class Product {
       'description': description,
       'category': category,
       'images': images,
+      'ratings': ratings!.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -49,6 +54,13 @@ class Product {
       description: map['description'] as String,
       category: map['category'] as String,
       images: List<String>.from((map['images'])),
+      ratings: map['ratings'] != null
+          ? List<Rating>.from(
+              (map['ratings'] as List).map(
+                (x) => Rating.fromMap(x),
+              ),
+            )
+          : null,
     );
   }
 

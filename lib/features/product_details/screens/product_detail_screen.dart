@@ -21,6 +21,9 @@ class ProductDetailScreen extends StatefulWidget {
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   final productDetailServices = ProductDetailServices();
   int cartQuantity = 1;
+  double avgRating = 0;
+  double myRating = 0;
+
   void addProduct() {
     if (cartQuantity < widget.product.quantity) {
       setState(() {
@@ -47,10 +50,35 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     }
   }
 
+  @override
+  void initState() {
+    super.initState();
+    double totalRating = 0;
+    for (int i = 0; i < widget.product.ratings!.length; i++) {
+      totalRating = totalRating + widget.product.ratings![i].rating;
+      if (widget.product.ratings![i].userId ==
+          Provider.of<UserProvider>(context, listen: false).user.id) {
+        myRating = widget.product.ratings![i].rating;
+      }
+    }
+    if (totalRating != 0) {
+      avgRating = totalRating / widget.product.ratings!.length;
+    }
+    setState(() {});
+  }
+
   void likeProduct() {
     productDetailServices.favoriteProduct(
       context: context,
       product: widget.product,
+    );
+  }
+
+  void rateProduct(double value) {
+    productDetailServices.rateProduct(
+      context: context,
+      product: widget.product,
+      rating: value,
     );
   }
 
@@ -69,7 +97,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         break;
       }
     }
-
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
@@ -292,7 +319,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             height: 5,
                           ),
                           RatingBar.builder(
-                            initialRating: 3,
+                            initialRating: avgRating,
                             minRating: 0,
                             itemCount: 5,
                             allowHalfRating: true,
@@ -303,7 +330,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               Icons.favorite,
                               color: GlobalVariables.secondaryColor,
                             ),
-                            onRatingUpdate: (value) {},
+                            onRatingUpdate: rateProduct,
                           ),
                         ],
                       ),

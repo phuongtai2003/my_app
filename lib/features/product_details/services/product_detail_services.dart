@@ -50,4 +50,41 @@ class ProductDetailServices {
       showSnackBar(context, e.toString());
     }
   }
+
+  void rateProduct(
+      {required BuildContext context,
+      required Product product,
+      required double rating}) async {
+    final userProvider = Provider.of<UserProvider>(
+      context,
+      listen: false,
+    );
+    try {
+      http.Response res = await http.post(
+        Uri.parse("$uri/api/product/rate"),
+        body: jsonEncode(
+          {
+            'id': product.id!,
+            'rate': rating,
+          },
+        ),
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+          "token": userProvider.user.token,
+        },
+      );
+      httpErrorHandler(
+        context: context,
+        res: res,
+        onSuccess: () {
+          showSnackBar(
+            context,
+            "${product.name} rated successfully",
+          );
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
 }
