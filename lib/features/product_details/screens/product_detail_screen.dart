@@ -23,6 +23,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   int cartQuantity = 1;
   double avgRating = 0;
   double myRating = 0;
+  bool isFavorite = false;
 
   void addProduct() {
     if (cartQuantity < widget.product.quantity) {
@@ -64,6 +65,18 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     if (totalRating != 0) {
       avgRating = totalRating / widget.product.ratings!.length;
     }
+    final user = Provider.of<UserProvider>(
+      context,
+      listen: false,
+    ).user;
+    for (int i = 0; i < user.favoriteProducts!.length; i++) {
+      if (user.favoriteProducts![i].id! == widget.product.id!) {
+        setState(() {
+          isFavorite = true;
+        });
+        break;
+      }
+    }
     setState(() {});
   }
 
@@ -72,6 +85,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       context: context,
       product: widget.product,
     );
+    isFavorite = !isFavorite;
+    setState(() {});
   }
 
   void rateProduct(double value) {
@@ -82,21 +97,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     );
   }
 
+  void addToCart() {
+    productDetailServices.addToCart(
+      context: context,
+      product: widget.product,
+      quantity: cartQuantity,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserProvider>(
-      context,
-      listen: false,
-    ).user;
-    bool isFavorite = false;
-    for (int i = 0; i < user.favoriteProducts!.length; i++) {
-      if (user.favoriteProducts![i].id! == widget.product.id!) {
-        setState(() {
-          isFavorite = true;
-        });
-        break;
-      }
-    }
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
@@ -408,7 +418,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         Expanded(
                           child: CustomButton(
                             buttonText: "Add to cart",
-                            onTap: () {},
+                            onTap: addToCart,
                           ),
                         ),
                       ],

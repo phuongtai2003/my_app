@@ -42,4 +42,31 @@ userRouter.post("/api/favorite", auth, async (req, res) => {
   }
 });
 
+userRouter.post("/api/add-to-cart", auth, async (req, res) => {
+  try {
+    const { id, quantity } = req.body;
+    const product = await Product.findById(id);
+    let user = await User.findById(req.user);
+    if (user.cart.length == 0) {
+      user.cart.push({ product: product, quantity: quantity });
+    } else {
+      let isFound = false;
+      for (let i = 0; i < user.cart.length; i++) {
+        if (product._id.equals(user.cart[i].product._id)) {
+          user.cart[i].quantity += quantity;
+          isFound = true;
+          break;
+        }
+      }
+      if (isFound == false) {
+        user.cart.push({ product: product, quantity: quantity });
+      }
+    }
+    user = await user.save();
+    res.json(user);
+  } catch (e) {
+    return res.status(500).json({ error: e.message });
+  }
+});
+
 module.exports = userRouter;

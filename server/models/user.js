@@ -33,6 +33,15 @@ const userSchema = mongoose.Schema({
     default: "user",
   },
   favoriteProducts: [productSchema],
+  cart: [
+    {
+      product: productSchema,
+      quantity: {
+        type: Number,
+        required: true,
+      },
+    },
+  ],
 });
 
 const User = mongoose.model("User", userSchema);

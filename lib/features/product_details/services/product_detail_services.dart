@@ -87,4 +87,47 @@ class ProductDetailServices {
       showSnackBar(context, e.toString());
     }
   }
+
+  void addToCart(
+      {required BuildContext context,
+      required Product product,
+      required int quantity}) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    try {
+      http.Response res = await http.post(
+        Uri.parse("$uri/api/add-to-cart"),
+        body: jsonEncode(
+          {
+            'id': product.id,
+            'quantity': quantity,
+          },
+        ),
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+          "token": userProvider.user.token,
+        },
+      );
+      httpErrorHandler(
+        context: context,
+        res: res,
+        onSuccess: () {
+          final returnRes = jsonDecode(res.body);
+          final cart = returnRes['cart'];
+          final newUser = userProvider.user.copyWith(cart: cart);
+          userProvider.setUserFromModel(
+            newUser,
+          );
+          showSnackBar(
+            context,
+            "${product.name} added to cart successfully",
+          );
+        },
+      );
+    } catch (e) {
+      showSnackBar(
+        context,
+        e.toString(),
+      );
+    }
+  }
 }
