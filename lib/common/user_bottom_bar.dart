@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/constants/global_variables.dart';
+import 'package:my_app/features/cart/screens/cart_screen.dart';
 import 'package:my_app/features/home/screens/home_screen.dart';
 import 'package:my_app/features/profile/screens/profile_screen.dart';
 
@@ -18,7 +19,7 @@ class _UserBottomBarState extends State<UserBottomBar> {
   List<Widget> pages = [
     const HomeScreen(),
     const ProfileScreen(),
-    const Text("Cart"),
+    const CartScreen(),
     const Text("Order")
   ];
   @override
@@ -26,6 +27,7 @@ class _UserBottomBarState extends State<UserBottomBar> {
     return Scaffold(
       body: pages[pageIndex],
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         onTap: (value) {
           if (value != pageIndex) {
             setState(() {
