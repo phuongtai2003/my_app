@@ -5,10 +5,15 @@ import 'package:my_app/features/cart/widgets/cart_subtotal.dart';
 import 'package:my_app/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
   static const String routeName = '/cart-screen';
 
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context, listen: false);

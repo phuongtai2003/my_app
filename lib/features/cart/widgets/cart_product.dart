@@ -1,17 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/constants/global_variables.dart';
+import 'package:my_app/features/cart/services/cart_services.dart';
+import 'package:my_app/features/product_details/services/product_detail_services.dart';
 import 'package:my_app/models/product.dart';
 import 'package:my_app/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 
-class CartProduct extends StatelessWidget {
+class CartProduct extends StatefulWidget {
   const CartProduct({super.key, required this.index});
   final int index;
 
   @override
+  State<CartProduct> createState() => _CartProductState();
+}
+
+class _CartProductState extends State<CartProduct> {
+  final ProductDetailServices productDetailServices = ProductDetailServices();
+  final CartServices cartServices = CartServices();
+
+  void removeFromCart(Product product) {
+    cartServices.removeFromCart(context: context, product: product);
+  }
+
+  void addToCart(Product product) {
+    productDetailServices.addToCart(
+        context: context, product: product, quantity: 1);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final cart =
-        Provider.of<UserProvider>(context, listen: false).user.cart[index];
+    final cart = Provider.of<UserProvider>(context)
+        .user
+        .cart[widget.index];
     final Product product = Product.fromMap(cart['product']);
     final int quantity = cart['quantity'];
     double avgRating = 0;
@@ -131,7 +151,7 @@ class CartProduct extends StatelessWidget {
               child: Column(
                 children: [
                   InkWell(
-                    onTap: () {},
+                    onTap: () => removeFromCart(product),
                     child: const SizedBox(
                       width: 35,
                       height: 35,
@@ -159,7 +179,7 @@ class CartProduct extends StatelessWidget {
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () => addToCart(product),
                     child: const SizedBox(
                       width: 35,
                       height: 35,
