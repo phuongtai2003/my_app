@@ -3,6 +3,7 @@ import 'package:my_app/common/seller_bottom_bar.dart';
 import 'package:my_app/common/user_bottom_bar.dart';
 import 'package:my_app/features/auth/screens/auth_screen.dart';
 import 'package:my_app/features/cart/screens/cart_screen.dart';
+import 'package:my_app/features/checkout/screens/checkout_screen.dart';
 import 'package:my_app/features/home/screens/category_screen.dart';
 import 'package:my_app/features/home/screens/home_screen.dart';
 import 'package:my_app/features/product_details/screens/product_detail_screen.dart';
@@ -15,6 +16,11 @@ import 'package:my_app/models/product.dart';
 
 Route<dynamic> onGeneratedRoute(RouteSettings settings) {
   switch (settings.name) {
+    case CheckoutScreen.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const CheckoutScreen(),
+        settings: settings,
+      );
     case CartScreen.routeName:
       return MaterialPageRoute(
         builder: (_) => const CartScreen(),

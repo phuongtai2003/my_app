@@ -7,17 +7,19 @@ class CustomButton extends StatelessWidget {
     required this.buttonText,
     required this.onTap,
     this.color = GlobalVariables.secondaryColor,
+    this.height = 50,
   });
   final String buttonText;
   final VoidCallback onTap;
   final Color color;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
-        minimumSize: const Size.fromHeight(50),
+        minimumSize: Size.fromHeight(height),
         backgroundColor: color,
       ),
       child: Text(

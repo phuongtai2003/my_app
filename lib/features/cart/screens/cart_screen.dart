@@ -14,6 +14,7 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context, listen: false);

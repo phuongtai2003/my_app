@@ -1,11 +1,24 @@
 import 'package:my_app/common/custom_button.dart';
 import 'package:my_app/constants/global_variables.dart';
+import 'package:my_app/features/checkout/screens/checkout_screen.dart';
 import 'package:my_app/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
-class CartSubtotal extends StatelessWidget {
+class CartSubtotal extends StatefulWidget {
   const CartSubtotal({super.key});
+
+  @override
+  State<CartSubtotal> createState() => _CartSubtotalState();
+}
+
+class _CartSubtotalState extends State<CartSubtotal> {
+  void proceedToCheckout() {
+    Navigator.pushNamed(
+      context,
+      CheckoutScreen.routeName,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +71,10 @@ class CartSubtotal extends StatelessWidget {
             width: 30,
           ),
           Expanded(
-            child: CustomButton(buttonText: "Checkout", onTap: () {}),
+            child: CustomButton(
+              buttonText: "Checkout",
+              onTap: proceedToCheckout,
+            ),
           ),
         ],
       ),

@@ -1,31 +1,37 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
-  const CustomTextField({
-    super.key,
-    required this.textEditingController,
-    required this.hintText,
-    this.maxLines = 1,
-  });
+class CheckoutTextField extends StatelessWidget {
+  const CheckoutTextField(
+      {super.key, required this.textEditingController, required this.hintText});
   final TextEditingController textEditingController;
   final String hintText;
-  final int maxLines;
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      maxLines: maxLines,
+      style: const TextStyle(
+        fontSize: 20,
+      ),
       controller: textEditingController,
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 30,
+          horizontal: 20,
+        ),
         border: const OutlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.black,
-            width: 0.5,
+            color: Colors.black12,
+            style: BorderStyle.none,
+          ),
+          borderRadius: BorderRadius.all(
+            Radius.zero,
           ),
         ),
         hintText: hintText,
+        hintStyle: const TextStyle(
+          fontSize: 20,
+        ),
       ),
       validator: (value) {
         if (value == null || value.isEmpty) {

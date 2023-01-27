@@ -116,34 +116,18 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               gradient: GlobalVariables.appBarGradient,
             ),
           ),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                margin: const EdgeInsets.only(
-                  top: 5,
-                ),
-                child: const Text(
-                  "Product Details",
-                  style: TextStyle(
-                    fontSize: 23,
-                    color: Colors.black,
-                  ),
-                ),
+          actions: [
+            Container(
+              margin: const EdgeInsets.only(
+                right: 15,
               ),
-              Container(
-                margin: const EdgeInsets.only(
-                  right: 5,
-                  top: 5,
-                ),
-                child: const Icon(
-                  Icons.notifications_outlined,
-                  color: Colors.black,
-                  size: 30,
-                ),
+              child: Image.asset(
+                "assets/images/app_bar.png",
+                height: 50,
+                width: 50,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
       body: SingleChildScrollView(
