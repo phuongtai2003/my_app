@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/common/custom_button.dart';
 import 'package:my_app/features/checkout/widgets/checkout_textfield.dart';
+import 'package:my_app/features/checkout/widgets/under_appbar.dart';
 
 class Address extends StatefulWidget {
   const Address({
     super.key,
     required this.callback,
   });
-  final VoidCallback callback;
+  final Function(String) callback;
   @override
   State<Address> createState() => _AddressState();
 }
@@ -19,7 +20,7 @@ class _AddressState extends State<Address> {
   final TextEditingController _wardController = TextEditingController();
   final TextEditingController _districtController = TextEditingController();
   final TextEditingController _cityController = TextEditingController();
-  
+
   @override
   void dispose() {
     super.dispose();
@@ -34,24 +35,25 @@ class _AddressState extends State<Address> {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        color: Colors.black12,
+        color: Color.fromARGB(31, 158, 158, 158),
       ),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.symmetric(
-                vertical: 30,
-              ),
-              child: const Text(
-                "SHIPPING ADRESS",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                ),
+      child: Column(
+        children: [
+          const UnderAppBar(),
+          Container(
+            margin: const EdgeInsets.symmetric(
+              vertical: 30,
+            ),
+            child: const Text(
+              "SHIPPING ADRESS",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w400,
               ),
             ),
-            Container(
+          ),
+          Expanded(
+            child: Container(
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -99,20 +101,19 @@ class _AddressState extends State<Address> {
                       textEditingController: _cityController,
                       hintText: "City",
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    CustomButton(
-                      buttonText: "NEXT - PAYMENT INFO",
-                      onTap: widget.callback,
-                      height: 100,
-                    ),
                   ],
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+          CustomButton(
+            buttonText: "NEXT - PAYMENT INFO",
+            onTap: () {
+              widget.callback("Hello");
+            },
+            height: 100,
+          ),
+        ],
       ),
     );
   }

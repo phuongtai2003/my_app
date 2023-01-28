@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/constants/global_variables.dart';
 import 'package:my_app/features/checkout/widgets/address.dart';
-import 'package:my_app/features/checkout/widgets/under_appbar.dart';
+import 'package:my_app/features/checkout/widgets/card_choice.dart';
 
 enum Checkout {
   address,
@@ -44,23 +44,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           centerTitle: true,
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const UnderAppBar(),
-            if (_checkout == Checkout.address)
-              Address(
-                callback: () {
-                  setState(
-                    () {
-                      _checkout = Checkout.payment;
-                    },
-                  );
-                },
-              ),
-          ],
-        ),
-      ),
+      body: const CardChoice(),
     );
   }
 }
