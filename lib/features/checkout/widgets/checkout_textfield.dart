@@ -16,16 +16,16 @@ class CheckoutTextField extends StatelessWidget {
         filled: true,
         fillColor: Colors.white,
         contentPadding: const EdgeInsets.symmetric(
-          vertical: 30,
-          horizontal: 20,
+          vertical: 20,
+          horizontal: 15,
         ),
         border: const OutlineInputBorder(
           borderSide: BorderSide(
             color: Colors.black12,
-            style: BorderStyle.none,
+            style: BorderStyle.solid,
           ),
           borderRadius: BorderRadius.all(
-            Radius.zero,
+            Radius.circular(15),
           ),
         ),
         hintText: hintText,

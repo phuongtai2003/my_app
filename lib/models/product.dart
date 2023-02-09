@@ -39,7 +39,7 @@ class Product {
       'description': description,
       'category': category,
       'images': images,
-      'ratings': ratings!.map((x) => x.toMap()).toList(),
+      'ratings': ratings,
     };
   }
 

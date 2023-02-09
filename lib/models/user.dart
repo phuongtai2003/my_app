@@ -35,7 +35,7 @@ class User {
       'address': address,
       'type': type,
       'token': token,
-      'favoriteProducts': favoriteProducts!.map((x) => x.toMap()).toList(),
+      'favoriteProducts': favoriteProducts,
       'cart': cart,
     };
   }

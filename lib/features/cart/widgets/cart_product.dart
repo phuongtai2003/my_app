@@ -7,8 +7,9 @@ import 'package:my_app/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 
 class CartProduct extends StatefulWidget {
-  const CartProduct({super.key, required this.index});
+  const CartProduct({super.key, required this.index, this.changable = true});
   final int index;
+  final bool changable;
 
   @override
   State<CartProduct> createState() => _CartProductState();
@@ -66,6 +67,10 @@ class _CartProductState extends State<CartProduct> {
             height: 120,
             fit: BoxFit.cover,
           ),
+          if (!widget.changable)
+            const SizedBox(
+              width: 20,
+            ),
           Container(
             padding: const EdgeInsets.all(
               10,
@@ -118,22 +123,24 @@ class _CartProductState extends State<CartProduct> {
                           padding: const EdgeInsets.all(
                             5,
                           ),
-                          child: Row(children: [
-                            const Icon(
-                              Icons.star,
-                              color: Colors.white,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              avgRating.toString(),
-                              style: const TextStyle(
-                                fontSize: 17,
+                          child: Row(
+                            children: [
+                              const Icon(
+                                Icons.star,
                                 color: Colors.white,
                               ),
-                            ),
-                          ]),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                avgRating.toString(),
+                                style: const TextStyle(
+                                  fontSize: 17,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -142,56 +149,57 @@ class _CartProductState extends State<CartProduct> {
               ],
             ),
           ),
-          Container(
-            margin: const EdgeInsets.only(
-              left: 10,
-              top: 5,
-              bottom: 5,
-            ),
-            child: Column(
-              children: [
-                InkWell(
-                  onTap: () => removeFromCart(product),
-                  child: const SizedBox(
+          if (widget.changable)
+            Container(
+              margin: const EdgeInsets.only(
+                left: 10,
+                top: 5,
+                bottom: 5,
+              ),
+              child: Column(
+                children: [
+                  InkWell(
+                    onTap: () => removeFromCart(product),
+                    child: const SizedBox(
+                      width: 35,
+                      height: 35,
+                      child: Icon(
+                        Icons.remove,
+                        size: 25,
+                      ),
+                    ),
+                  ),
+                  Container(
                     width: 35,
                     height: 35,
-                    child: Icon(
-                      Icons.remove,
-                      size: 25,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: GlobalVariables.secondaryColor,
+                        width: 0.5,
+                      ),
+                      borderRadius: BorderRadius.circular(
+                        5,
+                      ),
+                    ),
+                    child: Text(
+                      quantity.toString(),
                     ),
                   ),
-                ),
-                Container(
-                  width: 35,
-                  height: 35,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: GlobalVariables.secondaryColor,
-                      width: 0.5,
-                    ),
-                    borderRadius: BorderRadius.circular(
-                      5,
+                  InkWell(
+                    onTap: () => addToCart(product),
+                    child: const SizedBox(
+                      width: 35,
+                      height: 35,
+                      child: Icon(
+                        Icons.add,
+                        size: 25,
+                      ),
                     ),
                   ),
-                  child: Text(
-                    quantity.toString(),
-                  ),
-                ),
-                InkWell(
-                  onTap: () => addToCart(product),
-                  child: const SizedBox(
-                    width: 35,
-                    height: 35,
-                    child: Icon(
-                      Icons.add,
-                      size: 25,
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
         ],
       ),
     );

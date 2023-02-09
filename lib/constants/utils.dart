@@ -25,6 +25,7 @@ Future<List<File>> pickImages() async {
         );
       }
     }
+    FilePickerStatus.done;
   } catch (e) {
     print(
       e.toString(),
