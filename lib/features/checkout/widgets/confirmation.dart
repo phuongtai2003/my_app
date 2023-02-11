@@ -6,18 +6,22 @@ import 'package:my_app/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 
 class Confirmation extends StatelessWidget {
-  const Confirmation({super.key, required this.address, required this.payment});
-  final String address;
+  const Confirmation({
+    super.key,
+    required this.payment,
+    required this.callback,
+    required this.totalPrice,
+  });
   final String payment;
-
+  final VoidCallback callback;
+  final int totalPrice;
   @override
   Widget build(BuildContext context) {
+    final address = context.watch<UserProvider>().user.address;
     final userCart = context.watch<UserProvider>().user.cart;
-    int sum = 0;
     int totalQuantity = 0;
     userCart.map(
       (x) {
-        sum = sum + x['product']['price'] * x['quantity'] as int;
         totalQuantity = totalQuantity + x['quantity'] as int;
       },
     ).toList();
@@ -56,7 +60,7 @@ class Confirmation extends StatelessWidget {
             height: 20,
           ),
           Text(
-            "Total Billing: \$$sum",
+            "Total Billing: \$$totalPrice",
             style: const TextStyle(
               fontSize: 18,
             ),
@@ -120,7 +124,7 @@ class Confirmation extends StatelessWidget {
           ),
           CustomButton(
             buttonText: "Confirm",
-            onTap: () {},
+            onTap: callback,
           ),
         ],
       ),

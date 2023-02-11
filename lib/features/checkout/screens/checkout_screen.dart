@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/constants/global_variables.dart';
+import 'package:my_app/features/checkout/services/checkout_services.dart';
 import 'package:my_app/features/checkout/widgets/address.dart';
 import 'package:my_app/features/checkout/widgets/payment.dart';
 import 'package:my_app/features/checkout/widgets/confirmation.dart';
@@ -12,8 +13,12 @@ enum Checkout {
 }
 
 class CheckoutScreen extends StatefulWidget {
-  const CheckoutScreen({super.key});
+  const CheckoutScreen({
+    super.key,
+    required this.totalPrice,
+  });
   static const String routeName = '/checkout-screen';
+  final int totalPrice;
 
   @override
   State<CheckoutScreen> createState() => _CheckoutScreenState();
@@ -24,6 +29,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   String addressToBeUsed = "";
   String paymentMethod = "";
   int state = 1;
+  final CheckoutServices _checkoutServices = CheckoutServices();
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +70,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       _checkout = Checkout.payment;
                       state++;
                     });
+                    _checkoutServices.setUserAddress(
+                      context: context,
+                      address: addressToBeUsed,
+                    );
                   }
                 },
               ),
@@ -83,8 +93,16 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               ),
             if (_checkout == Checkout.confirm)
               Confirmation(
-                address: addressToBeUsed,
                 payment: paymentMethod,
+                totalPrice: widget.totalPrice,
+                callback: () {
+                  _checkoutServices.createOrder(
+                    context: context,
+                    totalPrice: widget.totalPrice,
+                    paymentMethod: paymentMethod,
+                  );
+                  
+                },
               ),
           ],
         ),

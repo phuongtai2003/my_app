@@ -17,8 +17,9 @@ import 'package:my_app/models/product.dart';
 Route<dynamic> onGeneratedRoute(RouteSettings settings) {
   switch (settings.name) {
     case CheckoutScreen.routeName:
+    final int totalPrice = settings.arguments as int;
       return MaterialPageRoute(
-        builder: (_) => const CheckoutScreen(),
+        builder: (_) => CheckoutScreen(totalPrice: totalPrice,),
         settings: settings,
       );
     case CartScreen.routeName:

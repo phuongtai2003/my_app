@@ -12,13 +12,9 @@ class UnderAppBar extends StatelessWidget {
     Color paymentColor = GlobalVariables.secondaryColor;
     Color confirmColor = GlobalVariables.secondaryColor;
     if (state == 1) {
-      shippingColor = GlobalVariables.unselectedColor;
       paymentColor = GlobalVariables.unselectedColor;
       confirmColor = GlobalVariables.unselectedColor;
     } else if (state == 2) {
-      paymentColor = GlobalVariables.unselectedColor;
-      confirmColor = GlobalVariables.unselectedColor;
-    } else {
       confirmColor = GlobalVariables.unselectedColor;
     }
     return Material(

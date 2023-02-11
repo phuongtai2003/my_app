@@ -13,10 +13,11 @@ class CartSubtotal extends StatefulWidget {
 }
 
 class _CartSubtotalState extends State<CartSubtotal> {
-  void proceedToCheckout() {
+  void proceedToCheckout(int totalPrice) {
     Navigator.pushNamed(
       context,
       CheckoutScreen.routeName,
+      arguments: totalPrice,
     );
   }
 
@@ -73,7 +74,7 @@ class _CartSubtotalState extends State<CartSubtotal> {
           Expanded(
             child: CustomButton(
               buttonText: "Checkout",
-              onTap: proceedToCheckout,
+              onTap: () => proceedToCheckout(sum),
             ),
           ),
         ],

@@ -41,38 +41,39 @@ Future<void> showDialogBox({
   required VoidCallback onYesChoice,
 }) async {
   return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text(
-            title,
-            style: const TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text(
+          title,
+          style: const TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        content: Text(
+          bodyContent,
+          style: const TextStyle(
+            fontSize: 18,
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text(
+              "No",
             ),
           ),
-          content: Text(
-            bodyContent,
-            style: const TextStyle(
-              fontSize: 18,
+          TextButton(
+            onPressed: onYesChoice,
+            child: const Text(
+              "Yes",
             ),
           ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text(
-                "No",
-              ),
-            ),
-            TextButton(
-              onPressed: onYesChoice,
-              child: const Text(
-                "Yes",
-              ),
-            ),
-          ],
-        );
-      });
+        ],
+      );
+    },
+  );
 }
