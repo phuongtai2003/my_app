@@ -6,20 +6,38 @@ import 'package:my_app/features/cart/screens/cart_screen.dart';
 import 'package:my_app/features/checkout/screens/checkout_screen.dart';
 import 'package:my_app/features/home/screens/category_screen.dart';
 import 'package:my_app/features/home/screens/home_screen.dart';
+import 'package:my_app/features/order/screens/order_screen.dart';
+import 'package:my_app/features/order_details/screens/order_details_screen.dart';
 import 'package:my_app/features/product_details/screens/product_detail_screen.dart';
 import 'package:my_app/features/profile/screens/profile_screen.dart';
 import 'package:my_app/features/search/screens/search_screen.dart';
 import 'package:my_app/features/seller/screens/add_product_screen.dart';
 import 'package:my_app/features/seller/screens/delete_product_screen.dart';
 import 'package:my_app/features/seller/screens/seller_screen.dart';
+import 'package:my_app/models/order.dart';
 import 'package:my_app/models/product.dart';
 
 Route<dynamic> onGeneratedRoute(RouteSettings settings) {
   switch (settings.name) {
-    case CheckoutScreen.routeName:
-    final int totalPrice = settings.arguments as int;
+    case OrderDetailsScreen.routeName:
+      final Order order = settings.arguments as Order;
       return MaterialPageRoute(
-        builder: (_) => CheckoutScreen(totalPrice: totalPrice,),
+        builder: (_) => OrderDetailsScreen(
+          order: order,
+        ),
+        settings: settings,
+      );
+    case OrderScreen.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const OrderScreen(),
+        settings: settings,
+      );
+    case CheckoutScreen.routeName:
+      final int totalPrice = settings.arguments as int;
+      return MaterialPageRoute(
+        builder: (_) => CheckoutScreen(
+          totalPrice: totalPrice,
+        ),
         settings: settings,
       );
     case CartScreen.routeName:

@@ -1,5 +1,6 @@
 import 'package:my_app/common/custom_button.dart';
 import 'package:my_app/constants/global_variables.dart';
+import 'package:my_app/constants/utils.dart';
 import 'package:my_app/features/checkout/screens/checkout_screen.dart';
 import 'package:my_app/provider/user_provider.dart';
 import 'package:provider/provider.dart';
@@ -13,12 +14,16 @@ class CartSubtotal extends StatefulWidget {
 }
 
 class _CartSubtotalState extends State<CartSubtotal> {
-  void proceedToCheckout(int totalPrice) {
-    Navigator.pushNamed(
-      context,
-      CheckoutScreen.routeName,
-      arguments: totalPrice,
-    );
+  void proceedToCheckout(int totalPrice, int cartLenght) {
+    if (cartLenght == 0) {
+      showSnackBar(context, "Cart is empty");
+    } else {
+      Navigator.pushNamed(
+        context,
+        CheckoutScreen.routeName,
+        arguments: totalPrice,
+      );
+    }
   }
 
   @override
@@ -74,7 +79,10 @@ class _CartSubtotalState extends State<CartSubtotal> {
           Expanded(
             child: CustomButton(
               buttonText: "Checkout",
-              onTap: () => proceedToCheckout(sum),
+              onTap: () => proceedToCheckout(
+                sum,
+                userCart.length,
+              ),
             ),
           ),
         ],

@@ -55,10 +55,10 @@ class Order {
         )),
       ),
       address: map['address'] as String,
-      totalPrice: map['totalPrice'] as double,
-      orderedAt: map['orderedAt'] as int,
+      totalPrice: map['totalPrice']?.toDouble() ?? 0.0,
+      orderedAt: map['orderedAt']?.toInt() ?? 0,
       paymentMethod: map['paymentMethod'] as String,
-      orderStatus: map['orderStatus'] as int,
+      orderStatus: map['orderStatus']?.toInt() ?? 0,
     );
   }
 

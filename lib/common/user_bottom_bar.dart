@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/constants/global_variables.dart';
 import 'package:my_app/features/cart/screens/cart_screen.dart';
 import 'package:my_app/features/home/screens/home_screen.dart';
+import 'package:my_app/features/order/screens/order_screen.dart';
 import 'package:my_app/features/profile/screens/profile_screen.dart';
 
 class UserBottomBar extends StatefulWidget {
@@ -20,7 +21,7 @@ class _UserBottomBarState extends State<UserBottomBar> {
     const HomeScreen(),
     const ProfileScreen(),
     const CartScreen(),
-    const Text("Order")
+    const OrderScreen(),
   ];
   @override
   Widget build(BuildContext context) {
