@@ -46,4 +46,41 @@ class HomeServices {
     }
     return products;
   }
+
+  Future<List<Product>> getDealsList({required BuildContext context}) async {
+    List<Product> productList = [];
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    try {
+      http.Response res = await http.get(
+        Uri.parse("$uri/api/product/deal"),
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+          "token": userProvider.user.token,
+        },
+      );
+
+      httpErrorHandler(
+        context: context,
+        res: res,
+        onSuccess: () {
+          final returnRes = jsonDecode(res.body);
+          for (int i = 0; i < returnRes.length; i++) {
+            productList.add(
+              Product.fromJson(
+                jsonEncode(
+                  returnRes[i],
+                ),
+              ),
+            );
+          }
+        },
+      );
+    } catch (e) {
+      showSnackBar(
+        context,
+        e.toString(),
+      );
+    }
+    return productList;
+  }
 }

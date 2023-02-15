@@ -64,7 +64,7 @@ class OrderProduct extends StatelessWidget {
                   height: 5,
                 ),
                 Text(
-                  "Category: \$${product.category}",
+                  "Category: ${product.category}",
                 ),
               ],
             ),
