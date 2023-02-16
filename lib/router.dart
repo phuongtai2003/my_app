@@ -14,11 +14,17 @@ import 'package:my_app/features/search/screens/search_screen.dart';
 import 'package:my_app/features/seller/screens/add_product_screen.dart';
 import 'package:my_app/features/seller/screens/delete_product_screen.dart';
 import 'package:my_app/features/seller/screens/seller_screen.dart';
+import 'package:my_app/features/settings/screens/settings_screen.dart';
 import 'package:my_app/models/order.dart';
 import 'package:my_app/models/product.dart';
 
 Route<dynamic> onGeneratedRoute(RouteSettings settings) {
   switch (settings.name) {
+    case SettingsScreen.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const SettingsScreen(),
+        settings: settings,
+      );
     case OrderDetailsScreen.routeName:
       final Order order = settings.arguments as Order;
       return MaterialPageRoute(

@@ -140,8 +140,38 @@ userRouter.post("/api/place-order", auth, async (req, res) => {
 
 userRouter.get("/api/fetch-order", auth, async (req, res) => {
   try {
-    const orders = await Order.find({userId: req.user});
+    const orders = await Order.find({ userId: req.user });
     res.json(orders);
+  } catch (e) {
+    return res.status(500).json({ error: e.message });
+  }
+});
+
+userRouter.post("/api/change-details", auth, async (req, res) => {
+  try {
+    const { name, email, address } = req.body;
+    let user = await User.findById(req.user);
+    const allUser = await User.find({});
+    let hasSameMail = false;
+
+    for (let i = 0; i < allUser.length; i++) {
+      if (email === allUser[i].email && !(allUser[i]._id.equals(user._id))) {
+        hasSameMail = true;
+        break;
+      }
+    }
+    
+    if (hasSameMail) {
+      return res
+        .status(400)
+        .json({ msg: "Another user with the same email has already exist" });
+    }
+    user.name = name;
+    user.email = email;
+    user.address = address;
+
+    user = await user.save();
+    res.json(user);
   } catch (e) {
     return res.status(500).json({ error: e.message });
   }

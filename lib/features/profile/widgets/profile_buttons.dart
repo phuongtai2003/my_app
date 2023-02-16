@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/features/profile/services/profile_services.dart';
 import 'package:my_app/features/profile/widgets/profile_custom_button.dart';
+import 'package:my_app/features/settings/screens/settings_screen.dart';
 import 'package:my_app/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +23,12 @@ class AccountButtons extends StatelessWidget {
               Expanded(
                 child: ProfileCustomButton(
                   buttonText: "Account Settings",
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      SettingsScreen.routeName,
+                    );
+                  },
                   color: Colors.black12,
                 ),
               ),
