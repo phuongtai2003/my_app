@@ -106,7 +106,7 @@ class _SellerScreenState extends State<SellerScreen> {
           color: Colors.black,
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
     );
   }
 }

@@ -84,7 +84,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       body: Padding(
         padding: const EdgeInsets.symmetric(
           vertical: 15,
-          horizontal: 5,
+          horizontal: 10,
         ),
         child: Column(
           children: [
@@ -102,9 +102,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 0.8,
-                  mainAxisSpacing: 3,
-                  crossAxisSpacing: 5,
+                  childAspectRatio: 0.75,
+                  mainAxisSpacing: 20,
+                  crossAxisSpacing: 20,
                 ),
                 itemCount: products.length,
                 itemBuilder: (context, index) => GestureDetector(

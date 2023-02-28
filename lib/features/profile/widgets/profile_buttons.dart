@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/features/order/screens/order_screen.dart';
 import 'package:my_app/features/profile/services/profile_services.dart';
 import 'package:my_app/features/profile/widgets/profile_custom_button.dart';
 import 'package:my_app/features/settings/screens/settings_screen.dart';
@@ -7,6 +8,13 @@ import 'package:provider/provider.dart';
 
 class AccountButtons extends StatelessWidget {
   const AccountButtons({super.key});
+
+  void navigateToOrder(BuildContext context) {
+    Navigator.pushNamed(
+      context,
+      OrderScreen.routeName,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +46,9 @@ class AccountButtons extends StatelessWidget {
               Expanded(
                 child: ProfileCustomButton(
                   buttonText: "Orders",
-                  onPressed: () {},
+                  onPressed: () {
+                    navigateToOrder(context);
+                  },
                   color: Colors.black12,
                 ),
               ),

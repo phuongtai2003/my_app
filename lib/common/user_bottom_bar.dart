@@ -21,7 +21,6 @@ class _UserBottomBarState extends State<UserBottomBar> {
     const HomeScreen(),
     const ProfileScreen(),
     const CartScreen(),
-    const OrderScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -95,26 +94,6 @@ class _UserBottomBarState extends State<UserBottomBar> {
               ),
               child: const Icon(
                 Icons.shopping_cart_outlined,
-                size: 30,
-              ),
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Container(
-              width: bottomBarItemWidth,
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    width: 2,
-                    color: pageIndex == 3
-                        ? GlobalVariables.selectedColor
-                        : GlobalVariables.unselectedColor,
-                  ),
-                ),
-              ),
-              child: const Icon(
-                Icons.payment_outlined,
                 size: 30,
               ),
             ),

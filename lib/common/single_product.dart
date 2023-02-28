@@ -10,62 +10,55 @@ class SingleProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: 5,
-        horizontal: 10,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(
-          10,
+    return Material(
+      borderRadius: const BorderRadius.all(
+        Radius.circular(
+          5,
         ),
-        border: Border.all(
-          color: Colors.black,
-          width: 0.75,
-        ),
-        color: Colors.black12,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: double.infinity,
-            margin: const EdgeInsets.only(
-              top: 5,
-            ),
-            decoration: BoxDecoration(
-              border: Border.all(
-                width: 1,
+      elevation: 5,
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          vertical: 5,
+          horizontal: 10,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: double.infinity,
+              margin: const EdgeInsets.only(
+                top: 5,
+              ),
+              child: Image.network(
+                product.images[0],
+                fit: BoxFit.cover,
+                height: 120,
               ),
             ),
-            child: Image.network(
-              product.images[0],
-              fit: BoxFit.cover,
-              height: 120,
+            const SizedBox(
+              height: 5,
             ),
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Text(
-            product.name,
-            style: const TextStyle(
-              fontSize: 18,
+            Text(
+              product.name,
+              style: const TextStyle(
+                fontSize: 18,
+              ),
             ),
-          ),
-          Text(
-            "\$${product.price}",
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
+            Text(
+              "\$${product.price}",
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          Text(
-            "QTY: ${product.quantity}",
-          ),
-          Text(
-            product.category,
-          ),
-        ],
+            Text(
+              "QTY: ${product.quantity}",
+            ),
+            Text(
+              product.category,
+            ),
+          ],
+        ),
       ),
     );
   }

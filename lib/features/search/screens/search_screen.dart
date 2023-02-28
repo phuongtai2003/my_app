@@ -101,9 +101,9 @@ class _SearchScreenState extends State<SearchScreen> {
                 itemCount: products.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 0.7,
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 10,
+                  childAspectRatio: 0.75,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
                 ),
                 itemBuilder: (context, index) => GestureDetector(
                   onTap: () => navigateToDetailScreen(
