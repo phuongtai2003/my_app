@@ -5,7 +5,6 @@ import 'package:my_app/constants/error_handler.dart';
 import 'package:my_app/constants/global_variables.dart';
 import 'package:my_app/constants/utils.dart';
 import 'package:http/http.dart' as http;
-import 'package:my_app/models/order.dart';
 import 'package:my_app/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +15,7 @@ class CheckoutServices {
   }) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
-      http.Response res = await http.post(
+      http.Response res = await http.put(
         Uri.parse("$uri/api/set-user-address"),
         body: jsonEncode(
           {

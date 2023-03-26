@@ -122,14 +122,9 @@ class SellerServices {
       listen: false,
     );
     try {
-      http.Response res = await http.post(
+      http.Response res = await http.delete(
         Uri.parse(
-          "$uri/api/product/delete",
-        ),
-        body: jsonEncode(
-          {
-            'id': product.id,
-          },
+          "$uri/api/product/delete?productId=${product.id}",
         ),
         headers: {
           "Content-Type": "application/json; charset=UTF-8",

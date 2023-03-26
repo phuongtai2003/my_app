@@ -90,7 +90,7 @@ userRouter.delete("/api/remove-from-cart/:id", auth, async (req, res) => {
   }
 });
 
-userRouter.post("/api/set-user-address", auth, async (req, res) => {
+userRouter.put("/api/set-user-address", auth, async (req, res) => {
   try {
     const { address } = req.body;
     let user = await User.findById(req.user);
@@ -155,12 +155,12 @@ userRouter.post("/api/change-details", auth, async (req, res) => {
     let hasSameMail = false;
 
     for (let i = 0; i < allUser.length; i++) {
-      if (email === allUser[i].email && !(allUser[i]._id.equals(user._id))) {
+      if (email === allUser[i].email && !allUser[i]._id.equals(user._id)) {
         hasSameMail = true;
         break;
       }
     }
-    
+
     if (hasSameMail) {
       return res
         .status(400)

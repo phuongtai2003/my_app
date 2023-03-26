@@ -24,9 +24,9 @@ sellerRouter.post("/api/product/sell", seller, async (req, res) => {
   }
 });
 
-sellerRouter.post("/api/product/delete", seller, async (req, res) => {
+sellerRouter.delete("/api/product/delete", seller, async (req, res) => {
   try {
-    const { id } = req.body;
+    const id = req.query.productId;
     const products = await Product.findByIdAndDelete(id);
     res.json(products);
   } catch (e) {
